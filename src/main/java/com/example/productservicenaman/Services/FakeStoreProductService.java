@@ -59,7 +59,7 @@ public class FakeStoreProductService implements ProductService {
         return answer;
     }
     public Product updateSingleProduct(Long id) {
-        FakeStoreProductDto productDto =restTemplate.
+        FakeStoreProductDto productDto =
         productDto.setTitle();
     }
 
