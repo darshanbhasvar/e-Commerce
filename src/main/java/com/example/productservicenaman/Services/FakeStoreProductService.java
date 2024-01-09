@@ -3,6 +3,7 @@ package com.example.productservicenaman.Services;
 import com.example.productservicenaman.Models.Category;
 import com.example.productservicenaman.Models.Product;
 import com.example.productservicenaman.dtos.FakeStoreProductDto;
+import com.example.productservicenaman.exceptions.ProductNotExistException;
 import org.apache.tomcat.util.http.FastHttpDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -37,11 +38,17 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
-    public Product getSingleProduct(Long id) {
+    public Product getSingleProduct(Long id) throws ProductNotExistException {
+        //int a=10/0;
         FakeStoreProductDto productDto = restTemplate.getForObject(
                 "http://fakestoreapi.com/products/" + id,
                 FakeStoreProductDto.class
         );
+        if(productDto == null){
+            throw new ProductNotExistException(
+                    "Product with id "+id +"is not exist"
+            );
+        }
         return convertFakeStoreProductToProduct(productDto);
 
     }
@@ -58,10 +65,10 @@ public class FakeStoreProductService implements ProductService {
         }
         return answer;
     }
-    public Product updateSingleProduct(Long id) {
-        FakeStoreProductDto productDto =
-        productDto.setTitle();
-    }
+//    public Product updateSingleProduct(Long id) {
+//        FakeStoreProductDto productDto =
+//        productDto.setTitle();
+//    }
 
     @Override
     public Product addNewProduct(Product product) {
