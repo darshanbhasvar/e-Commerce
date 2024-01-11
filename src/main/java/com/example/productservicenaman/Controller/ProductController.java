@@ -7,6 +7,7 @@ import com.example.productservicenaman.Services.ProductService;
 import com.example.productservicenaman.dtos.ArithmaticExceptionDto;
 import com.example.productservicenaman.exceptions.ProductNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,9 @@ public class ProductController {
     private RestTemplate restTemplate;
 
     @Autowired
-    public ProductController(ProductService productService ,RestTemplate restTemplate) {
+
+
+    public ProductController(@Qualifier("selfproductservice") ProductService productService , RestTemplate restTemplate) {
         this.productService = productService;
         this.restTemplate = restTemplate;
     }
