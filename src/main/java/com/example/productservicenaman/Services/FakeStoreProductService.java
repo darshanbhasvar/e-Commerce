@@ -6,6 +6,7 @@ import com.example.productservicenaman.dtos.FakeStoreProductDto;
 import com.example.productservicenaman.exceptions.ProductNotExistException;
 import org.apache.tomcat.util.http.FastHttpDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpMessageConverterExtractor;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("fakestoreproductservice")
+@Primary
 public class FakeStoreProductService implements ProductService {
     private RestTemplate restTemplate;
 
@@ -94,6 +96,11 @@ public class FakeStoreProductService implements ProductService {
         restTemplate.delete(
                 "http://fakestoreapi.com/products/" + id
         );
+    }
+
+    @Override
+    public Product updateProduct(Long id, Product product) {
+        return null;
     }
 
 }
